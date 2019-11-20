@@ -121,7 +121,7 @@ QComboBox::down-arrow {
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap resource="qt-lightdm-greeter.qrc">:/resources/rqt-2.png</pixmap>
+         <pixmap resource="lightdm-qt5-greeter.qrc">:/resources/rqt-2.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -249,7 +249,7 @@ QComboBox::down-arrow {
           <string/>
          </property>
          <property name="icon">
-          <iconset resource="qt-lightdm-greeter.qrc">
+          <iconset resource="lightdm-qt5-greeter.qrc">
            <normaloff>:/resources/leaveIcon.svg</normaloff>:/resources/leaveIcon.svg</iconset>
          </property>
         </item>
@@ -261,7 +261,7 @@ QComboBox::down-arrow {
   </layout>
  </widget>
  <resources>
-  <include location="qt-lightdm-greeter.qrc"/>
+  <include location="lightdm-qt5-greeter.qrc"/>
  </resources>
  <connections/>
 </ui>

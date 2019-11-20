@@ -1,7 +1,7 @@
 /*
 * Copyright (c) 2012-2015 Christian Surlykke, Petr Vanek
 *
-* This file is part of qt-lightdm-greeter 
+* This file is part of lightdm-qt5-greeter 
 * It is distributed under the LGPL 2.1 or later license.
 * Please refer to the LICENSE file for a copy of the license.
 */

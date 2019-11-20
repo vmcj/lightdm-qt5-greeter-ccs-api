@@ -19,7 +19,7 @@ public:
     void setLastSession(QString userId, QString session) { setValue(userId + "/last-session", session); }
 };
 
-#define CONFIG_FILE "/etc/lightdm/qt-lightdm-greeter.conf"
+#define CONFIG_FILE "/etc/lightdm/lightdm-qt5-greeter.conf"
 #define BACKGROUND_IMAGE_KEY "greeter-background-image"
 #define LOGINFORM_OFFSETX_KEY "loginform-offset-x"
 #define LOGINFORM_OFFSETY_KEY "loginform-offset-y"
@@ -28,7 +28,7 @@ public:
 class Settings : public QSettings
 {
 public:
-    Settings() : QSettings(QString("/etc/lightdm/qt-lightdm-greeter.conf"), QSettings::NativeFormat) {}
+    Settings() : QSettings(QString("/etc/lightdm/lightdm-qt5-greeter.conf"), QSettings::NativeFormat) {}
     QString iconThemeName() { return value("greeter-icon-theme").toString(); }
     QString backgrundImagePath() { return value("greeter-background-image").toString(); }
     QString offsetX() { return value("loginform-offset-x").toString(); }

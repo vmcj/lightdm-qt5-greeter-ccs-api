@@ -7,7 +7,7 @@
 #define LOGINFORM_OFFSETY_KEY "loginform-offset-y"
 #define LOGFILE_PATH_KEY "logfile-path"
 
-const QString Cache::GREETER_DATA_DIR_PATH = "/var/lib/lightdm/qt-lightdm-greeter";
+const QString Cache::GREETER_DATA_DIR_PATH = "/var/lib/lightdm/lightdm-qt5-greeter";
 
 void Cache::prepare()
 {

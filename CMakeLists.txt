@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2 FATAL_ERROR)
-set(PROJECT qt-lightdm-greeter)
+set(PROJECT lightdm-qt5-greeter)
 project(${PROJECT})
 
 set(CMAKE_AUTOMOC ON)
@@ -11,7 +11,7 @@ message(STATUS "SRCS ${SRCS}")
 find_package(Qt5Widgets REQUIRED)
 #find_package(Qt5X11Extras REQUIRED QUIET)
 
-QT5_ADD_RESOURCES(RSCS qt-lightdm-greeter.qrc)
+QT5_ADD_RESOURCES(RSCS lightdm-qt5-greeter.qrc)
 
 
 include(FindPkgConfig)
@@ -22,15 +22,15 @@ include_directories ( ${CMAKE_CURRENT_SOURCE_DIR}
                       ${LIGHTDM_QT_INCLUDE_DIRS}
 )
 
-add_executable ( qt-lightdm-greeter ${SRCS} ${RSCS})
+add_executable ( lightdm-qt5-greeter ${SRCS} ${RSCS})
 
-target_link_libraries ( qt-lightdm-greeter Qt5::Widgets ${LIGHTDM_QT_LIBRARIES} )
+target_link_libraries ( lightdm-qt5-greeter Qt5::Widgets ${LIGHTDM_QT_LIBRARIES} )
 
 
 install(TARGETS ${PROJECT} RUNTIME DESTINATION bin)
-install(FILES   qt-lightdm-greeter.desktop  DESTINATION /usr/share/xgreeters)
+install(FILES   lightdm-qt5-greeter.desktop  DESTINATION /usr/share/xgreeters)
 
 if (NOT KEEP_CONFIGS)
-    install(FILES qt-lightdm-greeter.conf DESTINATION /etc/lightdm)
+    install(FILES lightdm-qt5-greeter.conf DESTINATION /etc/lightdm)
 endif()
 
