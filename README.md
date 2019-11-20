@@ -2,7 +2,7 @@
 
 lightdm-qt5-greeter is a simple frontend for the lightdm displaymanager, written in c++ and qt5.
 
-It has it's roots in the razor project, where it was developed under the name razor-lightdm-greeter. When razor was merged into LXQt it was renamed to lxlightdm-qt5-greeter.
+It has it's roots in the razor project, where it was developed under the name razor-lightdm-greeter. When razor was merged into LXQt it was renamed to lxqt-lightdm-greeter.
 
 As of september 2015 I have renamed it to qt-lightdm-greeter and cut it's ties to LXQt. This was primarily because LXQt recommends SDDM as its displaymanager and because the application had very little integration with LXQt. 
 
