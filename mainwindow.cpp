@@ -7,7 +7,7 @@
 */
 #include <QRect>
 #include <QApplication>
-#include <QDesktopWidget>
+#include <QScreen>
 #include <QPalette>
 #include <QString>
 #include <QDebug>
@@ -23,7 +23,7 @@ MainWindow::MainWindow(int screen, QWidget *parent) :
     setObjectName(QString("MainWindow_%1").arg(screen));
     
     
-    QRect screenRect = QApplication::desktop()->screenGeometry(screen);
+    QRect screenRect = QGuiApplication::screens().at(screen)->availableGeometry();
     setGeometry(screenRect);
 
     setBackground();
@@ -59,7 +59,8 @@ MainWindow::~MainWindow()
 
 bool MainWindow::showLoginForm()
 {
-    return m_Screen == QApplication::desktop()->primaryScreen();
+    QScreen *m_Screen = QGuiApplication::primaryScreen();
+    return m_Screen;
 }
 
 void MainWindow::setFocus(Qt::FocusReason reason)
@@ -112,7 +113,7 @@ void MainWindow::setBackground()
     }
     
     QPalette palette;
-    QRect rect = QApplication::desktop()->screenGeometry(m_Screen);
+    QRect rect = QGuiApplication::screens().at(m_Screen)->availableGeometry();
     if (backgroundImage.isNull()) {
         palette.setColor(QPalette::Background, Qt::black);
     }

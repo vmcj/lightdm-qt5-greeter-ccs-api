@@ -5,8 +5,8 @@
 * It is distributed under the LGPL 2.1 or later license.
 * Please refer to the LICENSE file for a copy of the license.
 */
-#include <QtWidgets/QApplication>
-#include <QDesktopWidget>
+#include <QApplication>
+#include <QScreen>
 #include <QtGlobal>
 #include <QtDebug>
 #include <QSettings>
@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
     }
 
     MainWindow *focusWindow = 0;
-    for (int i = 0; i < QApplication::desktop()->screenCount(); ++i) {
+    for (int i = 0; i < QGuiApplication::screens().count(); ++i) {
         MainWindow *w = new MainWindow(i);
         w->show();
         if (w->showLoginForm())

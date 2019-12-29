@@ -6,11 +6,9 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 
 file(GLOB SRCS *.cpp *ui *moc)
-message(STATUS "SRCS ${SRCS}")
+# message(STATUS "SRCS ${SRCS}")
 
-find_package(Qt5Widgets REQUIRED)
-find_package(Qt5Gui REQUIRED)
-find_package(Qt5Core REQUIRED)
+find_package(Qt5 5.10.0 CONFIG REQUIRED COMPONENTS Core Gui Widgets)
 
 QT5_ADD_RESOURCES(RSCS lightdm-qt5-greeter.qrc)
 
@@ -18,14 +16,14 @@ QT5_ADD_RESOURCES(RSCS lightdm-qt5-greeter.qrc)
 include(FindPkgConfig)
 pkg_check_modules(LIGHTDM_QT liblightdm-qt5-3)
 
-include_directories ( ${CMAKE_CURRENT_SOURCE_DIR}
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}
                       ${CMAKE_CURRENT_BINARY_DIR}
                       ${LIGHTDM_QT_INCLUDE_DIRS}
 )
 
-add_executable ( lightdm-qt5-greeter ${SRCS} ${RSCS})
+add_executable(lightdm-qt5-greeter ${SRCS} ${RSCS})
 
-target_link_libraries ( lightdm-qt5-greeter lightdm-qt5-3 Qt5::Widgets Qt5::Gui Qt5::Core )
+target_link_libraries(lightdm-qt5-greeter lightdm-qt5-3 Qt5::Widgets Qt5::Gui Qt5::Core)
 
 
 install(TARGETS ${PROJECT} RUNTIME DESTINATION bin)
