@@ -11,6 +11,8 @@
 #include <QtDebug>
 #include <QSettings>
 #include <QIcon>
+#include <QLocale>
+#include <QTranslator>
 
 #include <iostream>
 
@@ -33,6 +35,11 @@ int main(int argc, char *argv[])
     Cache::prepare();
 
     QApplication a(argc, argv);
+
+    QTranslator* translator = new QTranslator();
+    if (translator->load("lightdm-qt5-greeter_" + QLocale::system().name(), "/usr/share/lightdm-qt5-greeter/translations")) {
+        QCoreApplication::installTranslator(translator);
+    }
 
     if (! Settings().iconThemeName().isEmpty()) {
         QIcon::setThemeName(Settings().iconThemeName());
