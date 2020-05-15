@@ -3,9 +3,6 @@
 
 #include <QSettings>
 
-
-
-
 class Cache : public QSettings
 {
 public:
@@ -24,7 +21,6 @@ public:
 #define LOGINFORM_OFFSETX_KEY "loginform-offset-x"
 #define LOGINFORM_OFFSETY_KEY "loginform-offset-y"
 
-
 class Settings : public QSettings
 {
 public:
@@ -34,8 +30,5 @@ public:
     QString offsetX() { return value("loginform-offset-x").toString(); }
     QString offsetY() { return value("loginform-offset-y").toString(); }
 };
-
-
-
 
 #endif // SETTINGS_H

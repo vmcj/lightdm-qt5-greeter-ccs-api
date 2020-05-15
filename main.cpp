@@ -5,13 +5,14 @@
 * It is distributed under the LGPL 2.1 or later license.
 * Please refer to the LICENSE file for a copy of the license.
 */
-#include <QApplication>
-#include <QScreen>
 #include <QtGlobal>
 #include <QtDebug>
-#include <QSettings>
+#include <QApplication>
+#include <QGuiApplication>
+#include <QScreen>
 #include <QIcon>
 #include <QLocale>
+#include <QSettings>
 #include <QTranslator>
 
 #include <iostream>

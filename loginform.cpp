@@ -5,19 +5,20 @@
 * It is distributed under the LGPL 2.1 or later license.
 * Please refer to the LICENSE file for a copy of the license.
 */
-#include <QDebug>
-#include <QCompleter>
 #include <QAbstractListModel>
-#include <QModelIndex>
+#include <QCompleter>
+#include <QDebug>
 #include <QFile>
-#include <QTextStream>
-#include <QStringList>
-#include <QPixmap>
-#include <QMessageBox>
 #include <QMenu>
-#include <QProcess>
-#include <QLightDM/UsersModel>
+#include <QMessageBox>
 #include <QMetaMethod>
+#include <QModelIndex>
+#include <QPixmap>
+#include <QProcess>
+#include <QStringList>
+#include <QTextStream>
+
+#include <QLightDM/UsersModel>
 
 #include "loginform.h"
 #include "ui_loginform.h"
@@ -63,7 +64,6 @@ void LoginForm::setFocus(Qt::FocusReason reason)
         ui->passwordInput->setFocus(reason);
     }
 }
-
 
 void LoginForm::initialize()
 {
@@ -170,7 +170,6 @@ void LoginForm::setCurrentSession(QString session)
     }
 }
 
-
 void LoginForm::authenticationComplete()
 {
     if (m_Greeter.isAuthenticated()) {
@@ -194,4 +193,3 @@ void LoginForm::keyPressEvent(QKeyEvent *event)
         QWidget::keyPressEvent(event);
     }
 }
-

@@ -8,17 +8,16 @@
 #ifndef LOGINFORM_H
 #define LOGINFORM_H
 
-#include <QWidget>
-#include <QProcess>
 #include <QDialog>
-#include <QKeyEvent>
 #include <QGraphicsOpacityEffect>
+#include <QKeyEvent>
 #include <QMap>
+#include <QProcess>
+#include <QWidget>
 
 #include <QLightDM/Power>
 #include <QLightDM/Greeter>
 #include <QLightDM/SessionsModel>
-
 
 namespace Ui
 {

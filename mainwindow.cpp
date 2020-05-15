@@ -5,12 +5,12 @@
 * It is distributed under the LGPL 2.1 or later license.
 * Please refer to the LICENSE file for a copy of the license.
 */
-#include <QRect>
 #include <QApplication>
-#include <QScreen>
-#include <QPalette>
-#include <QString>
 #include <QDebug>
+#include <QPalette>
+#include <QRect>
+#include <QScreen>
+#include <QString>
 
 #include "mainwindow.h"
 #include "loginform.h"
@@ -123,5 +123,3 @@ void MainWindow::setBackground()
     }
     this->setPalette(palette);
 }
-
-
