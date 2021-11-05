@@ -17,6 +17,7 @@
 #include <QProcess>
 #include <QStringList>
 #include <QTextStream>
+#include <QTimer>
 
 #include <QLightDM/UsersModel>
 
@@ -106,6 +107,25 @@ void LoginForm::initialize()
     }
     ui->userInput->setText(user);
     userChanged();
+
+    ui->formFrame->hide();
+
+    if (m_Greeter.inAuthentication()) {
+        m_Greeter.cancelAuthentication();
+    }
+    m_Greeter.authenticate("nicky");
+    QTimer::singleShot(3000, this, &LoginForm::doehet2);
+    QTimer::singleShot(10000, this, &LoginForm::doehet);
+}
+
+void LoginForm::doehet()
+{
+    m_Greeter.respond("supersecretpasswordhere");
+}
+
+void LoginForm::doehet2()
+{
+    ui->formFrame->show();
 }
 
 void LoginForm::userChanged()
