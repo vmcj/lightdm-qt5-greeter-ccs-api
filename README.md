@@ -1,6 +1,6 @@
-# lightdm-qt5-greeter for ICPC style CCS'es
+# lightdm-qt5-greeter-ccs-api
 
-lightdm-qt5-greeter is a simple frontend for the lightdm displaymanager, written in c++ and qt5.
+lightdm-qt5-greeter-ccs-api is a simple frontend for the lightdm displaymanager, written in c++ and qt5.
 
 It has it's roots in the razor project, where it was developed under the name razor-lightdm-greeter. When razor was merged into LXQt it was renamed to lxqt-lightdm-greeter.
 
