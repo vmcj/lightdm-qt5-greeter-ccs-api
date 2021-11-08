@@ -8,16 +8,10 @@
 #include <QAbstractListModel>
 #include <QCompleter>
 #include <QDebug>
-#include <QFile>
 #include <QMenu>
 #include <QMessageBox>
 #include <QMetaMethod>
-#include <QModelIndex>
-#include <QPixmap>
-#include <QProcess>
 #include <QStringList>
-#include <QTextStream>
-#include <QTimer>
 
 #include <QLightDM/UsersModel>
 
@@ -48,6 +42,7 @@ LoginForm::LoginForm(QWidget *parent) :
         close();
     }
 
+    contestWatcher = new CcsContestWatcher(this);
     ui->setupUi(this);
     initialize();
 }
@@ -90,6 +85,9 @@ void LoginForm::initialize()
     connect(ui->leaveComboBox, SIGNAL(activated(int)), this, SLOT(leaveDropDownActivated(int)));
     connect(&m_Greeter, SIGNAL(showPrompt(QString, QLightDM::Greeter::PromptType)), this, SLOT(onPrompt(QString, QLightDM::Greeter::PromptType)));
     connect(&m_Greeter, SIGNAL(authenticationComplete()), this, SLOT(authenticationComplete()));
+
+    connect(contestWatcher, &CcsContestWatcher::contestAboutToStart, this, &LoginForm::contestAboutToStart);
+    connect(contestWatcher, &CcsContestWatcher::contestStarted, this, &LoginForm::contestStarted);
 
     ui->passwordInput->setEnabled(false);
     ui->passwordInput->clear();
@@ -137,17 +135,18 @@ void LoginForm::initialize()
         ui->formFrame->hide();
     }
 
-//    if (m_Greeter.inAuthentication()) {
-//        m_Greeter.cancelAuthentication();
-//    }
-//    m_Greeter.authenticate("nicky");
-//    QTimer::singleShot(10000, this, &LoginForm::doehet);
-}
+    if (!Settings().ccsContestApiUrl().isEmpty()) {
+        contestWatcher->startWatching(Settings().ccsContestApiUrl());
 
-//void LoginForm::doehet()
-//{
-//    m_Greeter.respond("supersecretpasswordhere");
-//}
+        if (Settings().ccsAutologinUsername().isEmpty()) {
+            QMessageBox::critical(this, "No autologin user", "CCS contest API URL provided, but no autologin username");
+        }
+
+        if (Settings().ccsAutologinPassword().isEmpty()) {
+            QMessageBox::critical(this, "No autologin user", "CCS contest API URL provided, but no autologin password");
+        }
+    }
+}
 
 void LoginForm::userChanged()
 {
@@ -223,6 +222,18 @@ void LoginForm::authenticationComplete()
         ui->passwordInput->clear();
         userChanged();
     }
+}
+
+void LoginForm::contestAboutToStart() {
+    if (m_Greeter.inAuthentication()) {
+        m_Greeter.cancelAuthentication();
+    }
+    m_Greeter.authenticate(Settings().ccsAutologinUsername());
+}
+
+void LoginForm::contestStarted() {
+    qDebug() << QDateTime::currentDateTime();
+    m_Greeter.respond(Settings().ccsAutologinPassword());
 }
 
 void LoginForm::keyPressEvent(QKeyEvent *event)

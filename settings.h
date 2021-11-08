@@ -22,6 +22,9 @@ public:
 #define LOGINFORM_OFFSETX_KEY "loginform-offset-x"
 #define LOGINFORM_OFFSETY_KEY "loginform-offset-y"
 #define LOGINFORM_SHOW_INPUT_CHAIN "loginform-show-input-chain"
+#define CCS_CONTEST_API_URL "ccs-contest-api-url"
+#define CCS_AUTOLOGIN_USERNAME "ccs-autologin-username"
+#define CCS_AUTOLOGIN_PASSWORD "ccs-autologin-password"
 
 class Settings : public QSettings
 {
@@ -32,6 +35,9 @@ public:
     QString offsetX() { return value(LOGINFORM_OFFSETX_KEY).toString(); }
     QString offsetY() { return value(LOGINFORM_OFFSETY_KEY).toString(); }
     QStringList loginformShowInputChain() { return value(LOGINFORM_SHOW_INPUT_CHAIN).toStringList(); }
+    QString ccsContestApiUrl() { return value(CCS_CONTEST_API_URL).toString(); }
+    QString ccsAutologinUsername() { return value(CCS_AUTOLOGIN_USERNAME).toString(); }
+    QString ccsAutologinPassword() { return value(CCS_AUTOLOGIN_PASSWORD).toString(); }
 };
 
 #endif // SETTINGS_H

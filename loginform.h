@@ -18,6 +18,7 @@
 #include <QLightDM/Power>
 #include <QLightDM/Greeter>
 #include <QLightDM/SessionsModel>
+#include "ccs_contest_watcher.h"
 
 namespace Ui
 {
@@ -35,12 +36,14 @@ public:
     ~LoginForm();
     virtual void setFocus(Qt::FocusReason reason);
 
-public slots:
+private slots:
     void userChanged();
     void leaveDropDownActivated(int index);
     void respond();
     void onPrompt(QString prompt, QLightDM::Greeter::PromptType promptType);
     void authenticationComplete();
+    void contestAboutToStart();
+    void contestStarted();
 
 protected:
     virtual void keyPressEvent(QKeyEvent *event);
@@ -60,6 +63,8 @@ private:
     QMap<int, void (QLightDM::PowerInterface::*)()> powerSlots;
 
     int positionInChain = 0;
+
+    CcsContestWatcher *contestWatcher;
 };
 
 #endif // LOGINFORM_H

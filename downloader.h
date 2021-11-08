@@ -8,22 +8,22 @@
 #include <QUrl>
 #include <QDateTime>
 #include <QFile>
-#include <QDebug>
 
 
-class Downloader : public QObject
-{
-    Q_OBJECT
+class Downloader : public QObject {
+Q_OBJECT
 public:
-    explicit Downloader(QObject *parent = 0);
+    explicit Downloader(QObject *parent = nullptr);
 
-    void doDownload(const QString& url, QString to);
+    void doDownload(const QString &url, QString to);
 
 signals:
+
     void imageDownloaded(QString path);
 
 private slots:
-    void replyFinished (QNetworkReply *reply);
+
+    void replyFinished(QNetworkReply *reply);
 
 private:
     QNetworkAccessManager *manager;
