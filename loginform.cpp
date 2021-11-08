@@ -59,7 +59,10 @@ LoginForm::~LoginForm()
 
 void LoginForm::setFocus(Qt::FocusReason reason)
 {
-    if (ui->userInput->text().isEmpty()) {
+    auto inputChain = Settings().loginformShowInputChain();
+    if (!inputChain.isEmpty() && positionInChain < inputChain.size()) {
+        QWidget::setFocus(reason);
+    } else if (ui->userInput->text().isEmpty()) {
         ui->userInput->setFocus(reason);
     } else {
         ui->passwordInput->setFocus(reason);
@@ -106,27 +109,45 @@ void LoginForm::initialize()
         user = m_Greeter.selectUserHint();
     }
     ui->userInput->setText(user);
-    userChanged();
 
-    ui->formFrame->hide();
+    auto inputChain = Settings().loginformShowInputChain();
+    if (inputChain.isEmpty()) {
+        userChanged();
+    } else {
+        // Validate input chain
+        auto meta = QMetaEnum::fromType<Qt::Key>();
+        QSet<QString> allKeysLower;
+        for (int i = 0; i < meta.keyCount(); i++) {
+            allKeysLower.insert(QString(meta.key(i)).toLower());
+            allKeysLower.insert(QString(meta.key(i)).toLower().replace("key_", ""));
+        }
 
-    if (m_Greeter.inAuthentication()) {
-        m_Greeter.cancelAuthentication();
+        QStringList wrongKeys;
+        for (const auto& item : inputChain) {
+            if (!allKeysLower.contains(item.toLower())) {
+                wrongKeys.append(item);
+            }
+        }
+
+        if (!wrongKeys.isEmpty()) {
+            QString message = "The following keys in the input chain are not valid: " + wrongKeys.join(", ");
+            QMessageBox::critical(this, "Wrong input chain", message);
+        }
+
+        ui->formFrame->hide();
     }
-    m_Greeter.authenticate("nicky");
-    QTimer::singleShot(3000, this, &LoginForm::doehet2);
-    QTimer::singleShot(10000, this, &LoginForm::doehet);
+
+//    if (m_Greeter.inAuthentication()) {
+//        m_Greeter.cancelAuthentication();
+//    }
+//    m_Greeter.authenticate("nicky");
+//    QTimer::singleShot(10000, this, &LoginForm::doehet);
 }
 
-void LoginForm::doehet()
-{
-    m_Greeter.respond("supersecretpasswordhere");
-}
-
-void LoginForm::doehet2()
-{
-    ui->formFrame->show();
-}
+//void LoginForm::doehet()
+//{
+//    m_Greeter.respond("supersecretpasswordhere");
+//}
 
 void LoginForm::userChanged()
 {
@@ -206,10 +227,27 @@ void LoginForm::authenticationComplete()
 
 void LoginForm::keyPressEvent(QKeyEvent *event)
 {
-    if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) {
+    auto inputChain = Settings().loginformShowInputChain();
+    if (!inputChain.isEmpty() && ui->formFrame->isHidden() && positionInChain < inputChain.size()) {
+        // Check if the current key press is the next in line
+        auto meta = QMetaEnum::fromType<Qt::Key>();
+        auto key = QString(meta.valueToKey(event->key()));
+        // Allow both `key_x` and `x`
+        if (key.toLower() == "key_" + inputChain[positionInChain].toLower() || key.toLower() == inputChain[positionInChain].toLower()) {
+            qDebug() << "Chain advance";
+            positionInChain++;
+            if (positionInChain == inputChain.size()) {
+                qDebug() << "Chain done";
+                ui->formFrame->show();
+                userChanged();
+            }
+        } else {
+            qDebug() << "Chain reset";
+            positionInChain = 0;
+        }
+    } else if (event->key() == Qt::Key_Return || event->key() == Qt::Key_Enter) {
         respond();
-    }
-    else {
+    } else {
         QWidget::keyPressEvent(event);
     }
 }

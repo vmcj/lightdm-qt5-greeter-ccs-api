@@ -1,4 +1,4 @@
-# lightdm-qt5-greeter
+# lightdm-qt5-greeter for ICPC style CCS'es
 
 lightdm-qt5-greeter is a simple frontend for the lightdm displaymanager, written in c++ and qt5.
 
@@ -7,6 +7,15 @@ It has it's roots in the razor project, where it was developed under the name ra
 As of september 2015 I have renamed it to qt-lightdm-greeter and cut it's ties to LXQt. This was primarily because LXQt recommends SDDM as its displaymanager and because the application had very little integration with LXQt. 
 
 qt-lightdm-greeter sports a razor-qt logo as a reminder of it's origin.
+
+## Changes from upstream
+
+This project is based on https://github.com/mrbrainsample/lightdm-qt5-greeter but has the following changes:
+
+* It allows downloading background images
+* It cleans up the config a bit
+* It adds support for hiding the login form until an input chain is pressed
+* It can watch a ICPC CCS contest API URL to determine when to auto login a user
 
 ## Installing
 

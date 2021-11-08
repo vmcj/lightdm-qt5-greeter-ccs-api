@@ -13,6 +13,7 @@
 #include <QLightDM/Greeter>
 
 #include "loginform.h"
+#include "downloader.h"
 
 namespace Ui {
     class MainWindow;
@@ -36,6 +37,10 @@ private:
     void setBackground();
     int m_Screen;
     LoginForm* m_LoginForm;
+    Downloader *d;
+
+private slots:
+    void backgroundDownloaded(const QString& path);
 };
 
 #endif // MAINWINDOW_H

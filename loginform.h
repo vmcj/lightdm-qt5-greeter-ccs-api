@@ -46,8 +46,6 @@ protected:
     virtual void keyPressEvent(QKeyEvent *event);
 
 private:
-    void doehet();
-    void doehet2();
     void initialize();
     void addLeaveEntry(bool canDo, QString iconName, QString text, QString actionName);
     QString currentSession();
@@ -60,6 +58,8 @@ private:
     QLightDM::SessionsModel sessionsModel;
 
     QMap<int, void (QLightDM::PowerInterface::*)()> powerSlots;
+
+    int positionInChain = 0;
 };
 
 #endif // LOGINFORM_H

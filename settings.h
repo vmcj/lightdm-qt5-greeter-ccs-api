@@ -21,6 +21,7 @@ public:
 #define BACKGROUND_IMAGE_KEY "greeter-background-image"
 #define LOGINFORM_OFFSETX_KEY "loginform-offset-x"
 #define LOGINFORM_OFFSETY_KEY "loginform-offset-y"
+#define LOGINFORM_SHOW_INPUT_CHAIN "loginform-show-input-chain"
 
 class Settings : public QSettings
 {
@@ -30,6 +31,7 @@ public:
     QString backgrundImagePath() { return value(BACKGROUND_IMAGE_KEY).toString(); }
     QString offsetX() { return value(LOGINFORM_OFFSETX_KEY).toString(); }
     QString offsetY() { return value(LOGINFORM_OFFSETY_KEY).toString(); }
+    QStringList loginformShowInputChain() { return value(LOGINFORM_SHOW_INPUT_CHAIN).toStringList(); }
 };
 
 #endif // SETTINGS_H
