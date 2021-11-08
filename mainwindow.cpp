@@ -100,14 +100,13 @@ int MainWindow::getOffset(QString settingsOffset, int maxVal, int defaultVal)
 void MainWindow::setBackground()
 {
     QImage backgroundImage;
-    QSettings greeterSettings(CONFIG_FILE, QSettings::IniFormat);
+
+    auto backgroundImagePath = Settings().backgrundImagePath();
     
-    if (greeterSettings.contains(BACKGROUND_IMAGE_KEY)) {
-        QString pathToBackgroundImage = greeterSettings.value(BACKGROUND_IMAGE_KEY).toString();
-        
-        backgroundImage = QImage(pathToBackgroundImage);
+    if (!backgroundImagePath.isEmpty()) {
+        backgroundImage = QImage(backgroundImagePath);
         if (backgroundImage.isNull()) {
-            qWarning() << "Not able to read" << pathToBackgroundImage << "as image";
+            qWarning() << "Not able to read" << backgroundImagePath << "as image";
         }
              
     }

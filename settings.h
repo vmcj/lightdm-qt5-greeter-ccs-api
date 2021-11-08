@@ -17,6 +17,7 @@ public:
 };
 
 #define CONFIG_FILE "/etc/lightdm/lightdm-qt5-greeter.conf"
+#define GREETER_ICON_THEME "greeter-icon-theme"
 #define BACKGROUND_IMAGE_KEY "greeter-background-image"
 #define LOGINFORM_OFFSETX_KEY "loginform-offset-x"
 #define LOGINFORM_OFFSETY_KEY "loginform-offset-y"
@@ -24,11 +25,11 @@ public:
 class Settings : public QSettings
 {
 public:
-    Settings() : QSettings(QString("/etc/lightdm/lightdm-qt5-greeter.conf"), QSettings::NativeFormat) {}
-    QString iconThemeName() { return value("greeter-icon-theme").toString(); }
-    QString backgrundImagePath() { return value("greeter-background-image").toString(); }
-    QString offsetX() { return value("loginform-offset-x").toString(); }
-    QString offsetY() { return value("loginform-offset-y").toString(); }
+    Settings() : QSettings(QString(CONFIG_FILE), QSettings::NativeFormat) {}
+    QString iconThemeName() { return value(GREETER_ICON_THEME).toString(); }
+    QString backgrundImagePath() { return value(BACKGROUND_IMAGE_KEY).toString(); }
+    QString offsetX() { return value(LOGINFORM_OFFSETX_KEY).toString(); }
+    QString offsetY() { return value(LOGINFORM_OFFSETY_KEY).toString(); }
 };
 
 #endif // SETTINGS_H
