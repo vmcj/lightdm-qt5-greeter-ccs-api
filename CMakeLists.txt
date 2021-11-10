@@ -37,3 +37,7 @@ if (NOT KEEP_CONFIGS)
     install(FILES lightdm-qt5-greeter.conf DESTINATION /etc/lightdm)
 endif()
 
+
+SET(CPACK_GENERATOR "DEB")
+SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "GEHACK")
+INCLUDE(CPack)
