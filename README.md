@@ -24,7 +24,7 @@ Make sure you have cmake, gcc, qt5 and liblightdm-qt5 (and lightdm) installed on
 Do
     
 ```shell
-git clone https://github.com/surlykke/lightdm-qt5-greeter.git
+git clone https://github.com/GEHACK/lightdm-qt5-greeter-ccs-api.git
 cd lightdm-qt5-greeter
 mkdir build
 cd build
